@@ -10,23 +10,25 @@ const float BASE_ZOOM = 0.5;
 
 class ComplexPlane
 {
+private:
+    Vector2f m_mouseLocation;
+    View m_view;
+    int m_zoomCount;
+    float m_aspectRatio;
+
 public:
-    ComplexPlane(float Aspect ratio); //constructor takes aspect ratio
+    ComplexPlane();
+    ComplexPlane(int, float); 
+    ComplexPlane(float aspectRatio); //constructor takes aspect ratio
     void zoomIn();
     void zoomOut();
     void setCenter(Vector2f coordinate);
     View getView();
     void setMouseLocation(Vector2f coordinate);
     void loadText(Text&); //don't fully understand this one?
-    size_t countIterations(Vector2f coordinate); //positive unsigned int
-    void iterationsToRGB(size_t count, Unit8& r, Unit8& g, Unit8& b); //what is Unit8? google it
+    static size_t countIterations(Vector2f coordinate); //positive unsigned int
+    static void iterationsToRGB(size_t count, Uint8& r, Uint8& g, Uint8& b); 
 
-
-private:
-    Vector2f m_mouseLocation;
-    View m_view;
-    int m_ZoomCount;
-    float m_aspectRatio;
 };
 
 #endif HEADERFILE_H
