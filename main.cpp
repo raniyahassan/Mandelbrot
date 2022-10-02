@@ -71,15 +71,31 @@ int main()
             {
                 for (int j = 0; j < height; j++)
                 {
-                    Colors[j + i * width].position = Vector2f((float)i, (float)j);
+                    Vector2f position = Vector2f((float)i, (float)j);
+                    Colors[j + i * width].position = position;
+
+                    Vector2i intPosition = {i,j};
+
+                    Vector2f pixelLocation = window.mapPixelToCoords(intPosition, complexPlane.getView());
+                    size_t iterations = complexPlane.countIterations(pixelLocation); 
+
+                    Uint8 r, g, b;
+                    complexPlane.iterationsToRGB(iterations, r, g, b); 
+                    
+                    Colors[j + i * width].color = {r,g,b}; 
+                    current = DISPLAYING;
+                    complexPlane.loadText(text); 
+
                 }
             }
         }
+        window.clear();
+        window.draw(Colors);
+        window.draw(text);
+
+        window.display();  
+
     }
-
-
-
-
 
     return 0; 
 }
