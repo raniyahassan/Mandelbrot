@@ -1,9 +1,8 @@
-//#include<SFML/Graphics.hpp> //not sure if we actually need to include this because we're including the header file
+#include <SFML/Graphics.hpp> //not sure if we actually need to include this because we're including the header file
 #include "ComplexPlane.h"
 //#include <cstdlib> //for abs value
 #include <complex>
 #include <iostream>
-//#include <cmath> //we need the power function :(
 
 
 using namespace std;
@@ -39,6 +38,11 @@ void ComplexPlane::setCenter(Vector2f coord)
     m_view.setCenter(coord); 
 }
 
+View ComplexPlane::getView()
+{
+    return m_view;
+}
+
 void ComplexPlane::setMouseLocation(Vector2f coord)
 {
     m_mouseLocation = coord; 
@@ -46,6 +50,10 @@ void ComplexPlane::setMouseLocation(Vector2f coord)
 
 void ComplexPlane::loadText(Text& text)
 {
+    text.setCharacterSize(30);
+    text.setFillColor(Color::Cyan);
+    text.setPosition(0,0); 
+
     stringstream str; 
     Vector2f center = m_view.getCenter(); 
     str << "Mandelbrot Set" << endl;
