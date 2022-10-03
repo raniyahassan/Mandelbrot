@@ -66,7 +66,7 @@ int main()
             if (Keyboard::isKeyPressed(Keyboard::Escape))
             {
                 window.close();
-            }
+        }
         }
 
         if (current == CALCULATING)
@@ -75,10 +75,10 @@ int main()
             {
                 for (int i = 0; i < height; i++)
                 {
-                    Vector2f position = Vector2f((float)i, (float)j);
+                    Vector2f position = Vector2f((float)j, (float)i);
                     Colors[j + i * width].position = position;
 
-                    Vector2i intPosition = {i,j};
+                    Vector2i intPosition = {j,i};
 
                     Vector2f pixelLocation = window.mapPixelToCoords(intPosition, complexPlane.getView());
                     size_t iterations = complexPlane.countIterations(pixelLocation); 
