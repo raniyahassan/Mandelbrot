@@ -5,8 +5,8 @@
 using namespace std;
 using namespace sf;
 
-int width = sf::VideoMode::getDesktopMode().width;
-int height = sf::VideoMode::getDesktopMode().height;
+int width = VideoMode::getDesktopMode().width;
+int height = VideoMode::getDesktopMode().height;
 int aspectRatio = height/width; 
 
 VideoMode VideoWindow(width, height); 
