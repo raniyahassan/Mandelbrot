@@ -67,9 +67,9 @@ int main()
 
         if (current == CALCULATING)
         {
-            for (int i = 0; i < width; i++)
+            for (int j = 0; j < width; j++)
             {
-                for (int j = 0; j < height; j++)
+                for (int i = 0; i < height; i++)
                 {
                     Vector2f position = Vector2f((float)i, (float)j);
                     Colors[j + i * width].position = position;
