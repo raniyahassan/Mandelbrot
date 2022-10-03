@@ -3,36 +3,40 @@
 #include "ComplexPlane.h"
 
 using namespace std;
-using namespace sf;
-
-int width = VideoMode::getDesktopMode().width;
-int height = VideoMode::getDesktopMode().height;
-int aspectRatio = height/width; 
-
-VideoMode VideoWindow(width, height); 
-RenderWindow window(VideoWindow,"Mandelbrot", Style::Default);
-
-ComplexPlane complexPlane(aspectRatio);
-Font font; 
-Text text; 
-VertexArray Colors(Points, height*width);
-
-enum State { CALCULATING, DISPLAYING }; 
-State current = CALCULATING; 
-
-Event event; 
+using namespace sf; 
 
 int main()
 {
+    double width = VideoMode::getDesktopMode().width;
+    double height = VideoMode::getDesktopMode().height;
+    double aspectRatio = height/width; 
+
+    Event event;
+    VideoMode VideoWindow(width, height); 
+    RenderWindow window(VideoWindow,"Mandelbrot", Style::Default);
+
+    ComplexPlane complexPlane(aspectRatio);
+    //Font font; 
+    //Text text; 
+    VertexArray Colors(Points, height*width);
+
+    enum State { CALCULATING, DISPLAYING }; 
+    State current = CALCULATING; 
+
     while (window.isOpen())
     {
-        if (Keyboard::isKeyPressed(Keyboard::Escape))
-        {
-            window.close();
-        }
-
         while (window.pollEvent(event))
         {
+            if (Keyboard::isKeyPressed(Keyboard::Escape))
+            {
+                window.close();
+            }
+
+            if (event.type == Event::Closed)
+            {
+                window.close(); 
+            }
+
             if (event.type == Event::MouseButtonPressed)
             {
                 Vector2f point = window.mapPixelToCoords(Mouse::getPosition(window), complexPlane.getView());
@@ -83,17 +87,21 @@ int main()
                     complexPlane.iterationsToRGB(iterations, r, g, b); 
                     
                     Colors[j + i * width].color = {r,g,b}; 
-                    current = DISPLAYING;
-                    complexPlane.loadText(text); 
+                    //complexPlane.loadText(text); 
 
                 }
+                current = DISPLAYING;
             }
         }
-        window.clear();
-        window.draw(Colors);
-        window.draw(text);
 
-        window.display();  
+        if (current == DISPLAYING)
+        {
+            window.clear();
+            window.draw(Colors);
+            //window.draw(text);
+
+            window.display();  
+        }
 
     }
 
