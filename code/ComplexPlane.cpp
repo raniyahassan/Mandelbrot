@@ -1,6 +1,7 @@
 #include "ComplexPlane.h"
 #include <cmath>
 #include <complex>
+#include <sstream>
 
 
 ComplexPlane::ComplexPlane(float aspectRatio)
@@ -53,6 +54,7 @@ void ComplexPlane::loadText(Text& text)
     double centerX, centerY, mouseX, mouseY; 
     str << m_view.getCenter().x << m_view.getCenter().y << m_mouseLocation.x << m_mouseLocation.y;
     str >> centerX >> centerY >> mouseX >> mouseY; 
+    cout << m_mouseLocation.x << "," << m_mouseLocation.y << endl; 
     text.setString("Mandelbrot Set\nCenter: (" + to_string(centerX) + "," + to_string(centerY) + ")\n" + "Cursor: " + "(" + to_string(mouseX) + "," + to_string(mouseY) + ")\n" + "Left Click to Zoom In\nRight Click to Zoom Out");
 }
 

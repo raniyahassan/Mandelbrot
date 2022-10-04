@@ -23,8 +23,6 @@ private:
     float m_aspectRatio;
 
 public:
-    //ComplexPlane();
-    //ComplexPlane(int, int, float); 
     ComplexPlane(float aspectRatio); //constructor takes aspect ratio
     void zoomIn();
     void zoomOut();
