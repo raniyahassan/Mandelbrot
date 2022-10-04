@@ -16,8 +16,18 @@ int main()
     RenderWindow window(VideoWindow,"Mandelbrot", Style::Default);
 
     ComplexPlane complexPlane(aspectRatio);
-    //Font font; 
-    //Text text; 
+    Font font; 
+    if (!font.loadFromFile("font/JandaCurlygirlSerif.ttf"))
+    {
+        cout << "Error loading font!" << endl; 
+    }
+    Text text; 
+    text.setFont(font); 
+    text.setCharacterSize(30); 
+    text.setFillColor(Color::White);
+    text.setString(""); 
+    text.setPosition(0,0); 
+
     VertexArray Colors(Points, height*width);
 
     enum State { CALCULATING, DISPLAYING }; 
@@ -87,9 +97,10 @@ int main()
                     complexPlane.iterationsToRGB(iterations, r, g, b); 
                     
                     Colors[j + i * width].color = {r,g,b}; 
-                    //complexPlane.loadText(text); 
 
                 }
+
+                complexPlane.loadText(text); 
                 current = DISPLAYING;
             }
         }
@@ -98,7 +109,7 @@ int main()
         {
             window.clear();
             window.draw(Colors);
-            //window.draw(text);
+            window.draw(text);
 
             window.display();  
         }

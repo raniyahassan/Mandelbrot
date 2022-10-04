@@ -1,12 +1,6 @@
-#include <SFML/Graphics.hpp> //not sure if we actually need to include this because we're including the header file
 #include "ComplexPlane.h"
-//#include <cstdlib> //for abs value
+#include <cmath>
 #include <complex>
-#include <iostream>
-
-
-using namespace std;
-using namespace sf;
 
 
 ComplexPlane::ComplexPlane(float aspectRatio)
@@ -50,27 +44,16 @@ void ComplexPlane::setMouseLocation(Vector2f coord)
 
 void ComplexPlane::loadText(Text& text)
 {
-    text.setCharacterSize(30);
-    text.setFillColor(Color::Cyan);
-    text.setPosition(0,0); 
-
     stringstream str; 
-    Vector2f center = m_view.getCenter(); 
-    str << "Mandelbrot Set" << endl;
-    str << "Center: (" << center.x << ", " << center.y << ")" << endl; 
-    str << "Cursor: (" << m_mouseLocation.x << ", " << m_mouseLocation.y << ")" << endl;
-    str << "Left Click to Zoom In" << endl; 
-    str << "Right Click to Zoom Out" << endl; 
-
-    string textTransfer; 
-    str >> textTransfer; 
-
-    text.setString(textTransfer); 
+    float centerX, centerY, mouseX, mouseY; 
+    str << m_view.getCenter().x << m_view.getCenter().y << m_mouseLocation.x << m_mouseLocation.y;
+    str >> centerX >> centerY >> mouseX >> mouseY; 
+    text.setString("Mandelbrot Set\nCenter: (" + to_string(centerX) + "," + to_string(centerY) + ")\n" + "Cursor: " + "(" + to_string(mouseX) + "," + to_string(mouseY) + ")\n" + "Left Click to Zoom In\nRight Click to Zoom Out");
 }
 
 size_t ComplexPlane::countIterations(Vector2f coord)
 {
-    float a =  coord.x;
+    float a = coord.x;
     float b = coord.y;
 
     complex<double>c(a,b); 
