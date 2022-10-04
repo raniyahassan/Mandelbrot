@@ -45,7 +45,7 @@ void ComplexPlane::setMouseLocation(Vector2f coord)
 
 void ComplexPlane::loadText(Text& text)
 {
-    text.setCharacterSize(30); 
+    text.setCharacterSize(22); 
     text.setFillColor(Color::White);
     text.setString(""); 
     text.setPosition(0,0);
@@ -61,7 +61,7 @@ void ComplexPlane::loadText(Text& text)
     mouseY1 << m_mouseLocation.y;
     mouseY1 >> mouseY;
     
-    text.setString("Mandelbrot Set\nCenter: (" + to_string(centerX) + "," + to_string(centerY) + ")\n" + "Cursor: " + "(" + to_string(mouseX) + "," + to_string(mouseY) + ")\n" + "Left Click to Zoom In\nRight Click to Zoom Out");
+    text.setString("Mandelbrot Set\nCenter: (" + to_string(centerX) + "," + to_string(centerY) + ")\n" + "Cursor: " + "(" + to_string(mouseX) + "," + to_string(mouseY) + ")\n" + "Left Click to Zoom In\nRight Click to Zoom Out\nZoom Count: " + to_string(m_zoomCount));
 }
 
 
@@ -97,13 +97,13 @@ void ComplexPlane::iterationsToRGB(size_t count, Uint8& r, Uint8& g, Uint8& b)
     {
         r = 222-(count%17)*5;
         g = 179-(count%17)*5;
-        b = 173;
+        b = 237;
     }
 
     else if (count > 30)
     {
         r = 222-(count%17)*5;
-        g = 0;
+        g = 132-(count%17)*5;
         b = 123;
     }
 
@@ -120,5 +120,6 @@ void ComplexPlane::iterationsToRGB(size_t count, Uint8& r, Uint8& g, Uint8& b)
         g = 20;
         b = 40;
     } 
+
 }
 

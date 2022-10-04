@@ -17,7 +17,7 @@ int main()
     VideoMode VideoWindow(width, height); 
     RenderWindow window(VideoWindow,"Mandelbrot", Style::Default);
 
-    RectangleShape rect(Vector2f{600 , 250}); 
+    RectangleShape rect(Vector2f{400 , 150}); 
     rect.setFillColor(Color(0,0,0,100)); 
 
     ComplexPlane complexPlane(aspectRatio);
@@ -26,7 +26,7 @@ int main()
         
     Text text; 
     text.setFont(font);
-    text.setLineSpacing(1.25);
+    text.setLineSpacing(1.1);
 
     VertexArray Colors(Points, height*width);
 
@@ -54,7 +54,7 @@ int main()
 
             if (event.MouseMoved)
             {       
-                complexPlane.setMouseLocation(window.mapPixelToCoords({event.mouseMove.x,event.mouseMove.y}, complexPlane.getView()));
+                complexPlane.setMouseLocation(window.mapPixelToCoords({event.mouseMove.x, event.mouseMove.y}, complexPlane.getView()));
             }
         }
 
@@ -77,7 +77,6 @@ int main()
                     Colors[j + i * width].color = {r,g,b}; 
 
                 }
-                complexPlane.loadText(text); 
                 current = DISPLAYING;
             }
         }
