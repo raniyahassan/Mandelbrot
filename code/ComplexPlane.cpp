@@ -5,20 +5,20 @@
 
 
 ComplexPlane::ComplexPlane(float aspectRatio)
-    {
-        m_aspectRatio = aspectRatio;
-        m_view.setSize(BASE_WIDTH, -BASE_HEIGHT * m_aspectRatio);
-        m_view.setCenter(0.0, 0.0);
-        m_zoomCount = 0;
-    }
+{
+    m_aspectRatio = aspectRatio;
+    m_view.setSize(BASE_WIDTH, -BASE_HEIGHT * m_aspectRatio);
+    m_view.setCenter(0.0, 0.0);
+    m_zoomCount = 0;
+}
 
 void ComplexPlane::zoomIn()
-    {
-        m_zoomCount++;
-        double x = BASE_WIDTH * (pow(BASE_ZOOM, m_zoomCount));
-        double y = BASE_HEIGHT * m_aspectRatio * pow(BASE_ZOOM, m_zoomCount);
-        m_view.setSize(x, y);
-    }
+{
+    m_zoomCount++;
+    double x = BASE_WIDTH * (pow(BASE_ZOOM, m_zoomCount));
+    double y = BASE_HEIGHT * m_aspectRatio * pow(BASE_ZOOM, m_zoomCount);
+    m_view.setSize(x, y);
+}
 
 void ComplexPlane::zoomOut()
 {
@@ -51,11 +51,10 @@ void ComplexPlane::loadText(Text& text)
     text.setPosition(5,5);
 
     stringstream str; 
-    double centerX, centerY, mouseX, mouseY; 
-    str << m_view.getCenter().x << m_view.getCenter().y << m_mouseLocation.x << m_mouseLocation.y;
-    str >> centerX >> centerY >> mouseX >> mouseY; 
-    cout << m_mouseLocation.x << "," << m_mouseLocation.y << endl; 
-    text.setString("Mandelbrot Set\nCenter: (" + to_string(centerX) + "," + to_string(centerY) + ")\n" + "Cursor: " + "(" + to_string(mouseX) + "," + to_string(mouseY) + ")\n" + "Left Click to Zoom In\nRight Click to Zoom Out");
+    str << "  Mandelbrot Set" << endl << "  Center: (" << (m_view.getCenter().x)<< "," << (m_view.getCenter().y) << ")" << endl 
+    << "  Cursor: (" << m_mouseLocation.x <<"," << m_mouseLocation.y << ")" << endl<< "  Left Click to Zoom In" << endl << "  Right Click to Zoom Out" << endl;
+
+    text.setString(str.str());
 }
 
 size_t ComplexPlane::countIterations(Vector2f coord)
@@ -74,7 +73,6 @@ size_t ComplexPlane::countIterations(Vector2f coord)
             return i; 
         }
     }
-
     return MAX_ITER; 
 }
 

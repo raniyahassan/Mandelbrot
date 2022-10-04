@@ -16,6 +16,7 @@ int main()
     Event event;
     VideoMode VideoWindow(width, height); 
     RenderWindow window(VideoWindow,"Mandelbrot", Style::Default);
+
     RectangleShape rect(Vector2f{500 , 200}); 
     rect.setFillColor(Color(0,0,0,100)); 
 
@@ -31,6 +32,7 @@ int main()
 
     enum State { CALCULATING, DISPLAYING }; 
     State current = CALCULATING; 
+
     while (window.isOpen())
     {
         while (window.pollEvent(event))
@@ -50,14 +52,13 @@ int main()
                 current = CALCULATING;
             }
 
-            if (event.type == Event::MouseMoved)
-            {
-                Vector2i mousePosition = Vector2i(event.mouseMove.x, event.mouseMove.y); 
-                Vector2f position = window.mapPixelToCoords(mousePosition, complexPlane.getView());
-                
-                complexPlane.setMouseLocation(position);
+            if (event.MouseMoved)
+            {       
+                Vector2f points;
+				points = window.mapPixelToCoords(Mouse::getPosition(window), complexPlane.getView());
+				complexPlane.setMouseLocation(points);
+                //complexPlane.setMouseLocation(window.mapPixelToCoords(Mouse::getPosition(window), complexPlane.getView()));
             }
-
         }
 
         if (current == CALCULATING)
@@ -66,26 +67,23 @@ int main()
             {
                 for (int i = 0; i < height; i++)
                 {
+                    Uint8 r, g, b;
                     Vector2f position = Vector2f((float)j, (float)i);
+                    
+                    Vector2i intPosition = {j,i};
                     Colors[j + i * width].position = position;
 
-                    Vector2i intPosition = {j,i};
-
                     Vector2f pixelLocation = window.mapPixelToCoords(intPosition, complexPlane.getView());
-                    size_t iterations = complexPlane.countIterations(pixelLocation); 
+                    size_t iterations = complexPlane.countIterations(pixelLocation);
 
-                    Uint8 r, g, b;
-                    complexPlane.iterationsToRGB(iterations, r, g, b); 
-                    
+                    complexPlane.iterationsToRGB(iterations, r, g, b);                
                     Colors[j + i * width].color = {r,g,b}; 
 
                 }
-
                 complexPlane.loadText(text); 
                 current = DISPLAYING;
             }
         }
-    
 
         if (current == DISPLAYING)
         {

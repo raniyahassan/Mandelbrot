@@ -32,7 +32,6 @@ public:
     void loadText(Text& text); //don't fully understand this one?
     size_t countIterations(Vector2f coordinate); //positive unsigned int
     void iterationsToRGB(size_t count, Uint8& r, Uint8& g, Uint8& b); 
-
 };
 
 #endif
