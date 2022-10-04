@@ -44,6 +44,11 @@ void ComplexPlane::setMouseLocation(Vector2f coord)
 
 void ComplexPlane::loadText(Text& text)
 {
+    text.setCharacterSize(30); 
+    text.setFillColor(Color::White);
+    text.setString(""); 
+    text.setPosition(5,5);
+
     stringstream str; 
     double centerX, centerY, mouseX, mouseY; 
     str << m_view.getCenter().x << m_view.getCenter().y << m_mouseLocation.x << m_mouseLocation.y;
@@ -73,42 +78,6 @@ size_t ComplexPlane::countIterations(Vector2f coord)
 
 void ComplexPlane::iterationsToRGB(size_t count, Uint8& r, Uint8& g, Uint8& b)
 {
-    /*if (count == MAX_ITER)
-    {
-        r = 0;
-        g = 0;
-        b = 0; 
-    }
-
-    else if ((count%10)*5 > 53 )
-    {
-        r = 237;
-        g = 113;
-        b = 104;
-    }
-
-    else if ((count%10)*5 > 33 )
-    {
-        r = 239;
-        g = 144;
-        b = 160;
-    }
-
-    else if ((count%10)*5 > 20 )
-    {
-        r = 242;
-        g = 171;
-        b = 181;
-    }
-
-    else if ((count%10)*5 > 0)
-    {
-        r = 246;
-        g = 205;
-        b = 204;
-    }
-
-    */
    if (count == MAX_ITER)
     {
         r = 0;
@@ -116,33 +85,32 @@ void ComplexPlane::iterationsToRGB(size_t count, Uint8& r, Uint8& g, Uint8& b)
         b = 0;
     }
 
-    else if ( count > 50)
+    else if (count > 50)
     {
         r = 222-(count%17)*5;
         g = 179-(count%17)*5;
         b = 173;
     }
+
     else if (count > 30)
     {
         r = 222-(count%17)*5;
-        g = 132-(count%17)*5;
+        g = 0;
         b = 123;
-
     }
 
-    else if (count > 15 )
+    else if (count > 15)
     {
-        
-
         r = 185-(count%17)*5;
         g = 92-(count%17)*5;
         b = 80;
     }
+
     else 
-    {
+    { 
         r = 59+(count%17)*5;
         g = 20;
-        b = 40;  
+        b = 40;
     } 
 }
 
