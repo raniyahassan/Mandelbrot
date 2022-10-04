@@ -52,7 +52,7 @@ int main()
                 current = CALCULATING;
             }
 
-            if (event.MouseMoved)
+            if (event.type == Event::MouseMoved)
             {       
                 complexPlane.setMouseLocation(window.mapPixelToCoords({event.mouseMove.x, event.mouseMove.y}, complexPlane.getView()));
             }
