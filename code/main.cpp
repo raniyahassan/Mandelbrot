@@ -17,7 +17,7 @@ int main()
     VideoMode VideoWindow(width, height); 
     RenderWindow window(VideoWindow,"Mandelbrot", Style::Default);
 
-    RectangleShape rect(Vector2f{500 , 200}); 
+    RectangleShape rect(Vector2f{600 , 250}); 
     rect.setFillColor(Color(0,0,0,100)); 
 
     ComplexPlane complexPlane(aspectRatio);
@@ -54,10 +54,7 @@ int main()
 
             if (event.MouseMoved)
             {       
-                Vector2f points;
-				points = window.mapPixelToCoords(Mouse::getPosition(window), complexPlane.getView());
-				complexPlane.setMouseLocation(points);
-                //complexPlane.setMouseLocation(window.mapPixelToCoords(Mouse::getPosition(window), complexPlane.getView()));
+                complexPlane.setMouseLocation(window.mapPixelToCoords({event.mouseMove.x,event.mouseMove.y}, complexPlane.getView()));
             }
         }
 
@@ -88,6 +85,7 @@ int main()
         if (current == DISPLAYING)
         {
             window.clear();
+            complexPlane.loadText(text); 
             window.draw(Colors);
             window.draw(rect); 
             window.draw(text);

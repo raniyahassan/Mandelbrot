@@ -48,14 +48,22 @@ void ComplexPlane::loadText(Text& text)
     text.setCharacterSize(30); 
     text.setFillColor(Color::White);
     text.setString(""); 
-    text.setPosition(5,5);
+    text.setPosition(0,0);
 
-    stringstream str; 
-    str << "  Mandelbrot Set" << endl << "  Center: (" << (m_view.getCenter().x)<< "," << (m_view.getCenter().y) << ")" << endl 
-    << "  Cursor: (" << m_mouseLocation.x <<"," << m_mouseLocation.y << ")" << endl<< "  Left Click to Zoom In" << endl << "  Right Click to Zoom Out" << endl;
-
-    text.setString(str.str());
+    stringstream centerX1, centerY1, mouseX1, mouseY1; 
+    float centerX, centerY, mouseX, mouseY;
+    centerX1 << m_view.getCenter().x;
+    centerX1 >> centerX;
+    centerY1 << m_view.getCenter().y;
+    centerY1 >> centerY;
+    mouseX1 << m_mouseLocation.x;
+    mouseX1 >> mouseX;
+    mouseY1 << m_mouseLocation.y;
+    mouseY1 >> mouseY;
+    
+    text.setString("Mandelbrot Set\nCenter: (" + to_string(centerX) + "," + to_string(centerY) + ")\n" + "Cursor: " + "(" + to_string(mouseX) + "," + to_string(mouseY) + ")\n" + "Left Click to Zoom In\nRight Click to Zoom Out");
 }
+
 
 size_t ComplexPlane::countIterations(Vector2f coord)
 {
