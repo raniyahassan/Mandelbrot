@@ -3,7 +3,8 @@
 
 #include <SFML/Graphics.hpp>
 #include <iostream>
-#include <vector>
+#include <cmath>
+#include <complex>
 
 using namespace std;
 using namespace sf; 

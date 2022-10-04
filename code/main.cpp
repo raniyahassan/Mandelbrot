@@ -69,14 +69,9 @@ int main()
 
             if (event.type == Event::MouseMoved)
             {
-                Vector2f point = window.mapPixelToCoords(Mouse::getPosition(window), complexPlane.getView());
-                complexPlane.setMouseLocation(point);
+                complexPlane.setMouseLocation(window.mapPixelToCoords(Mouse::getPosition(), complexPlane.getView()));
             }
 
-            if (Keyboard::isKeyPressed(Keyboard::Escape))
-            {
-                window.close();
-        }
         }
 
         if (current == CALCULATING)
@@ -104,6 +99,7 @@ int main()
                 current = DISPLAYING;
             }
         }
+        }
 
         if (current == DISPLAYING)
         {
@@ -114,7 +110,6 @@ int main()
             window.display();  
         }
 
-    }
 
     return 0; 
 }
